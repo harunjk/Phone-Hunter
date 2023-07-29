@@ -5,8 +5,21 @@ const loadPhone=(searchText)=>{
 }
 
 const displayPhone=phones=>{
+    // Phone slice 
+    phones=phones.slice(0,10);
+    
     const phoneContainer=document.getElementById('phone-container');
     phoneContainer.textContent='';
+
+    // Not found Msg 
+    const notFound=document.getElementById('notFund');
+    if(phones.length === 0){
+        notFound.classList.remove('d-none')
+    }
+    else{
+        notFound.classList.add('d-none')
+    }
+
     phones.forEach(phone => {
 
         const creatDiv=document.createElement('div');
