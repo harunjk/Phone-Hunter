@@ -11,9 +11,17 @@
         <h1>Phone Hunter</h1>
     </header>
     <main>
+      
         <section>
             <input id="search-input" class="w-50 my-5 " type="text" placeholder="Search your Phone">
             <button id="search-btn" class="btn btn-primary">Search</button>
+        </section>
+        <section id="spinner" class="d-none">
+          <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
         </section>
         <section>
             <div id="phone-container" class="row row-cols-1 row-cols-md-3 g-4">

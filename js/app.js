@@ -7,7 +7,7 @@ const loadPhone=(searchText)=>{
 const displayPhone=phones=>{
     // Phone slice 
     phones=phones.slice(0,10);
-    
+
     const phoneContainer=document.getElementById('phone-container');
     phoneContainer.textContent='';
 
@@ -34,13 +34,27 @@ const displayPhone=phones=>{
         </div>
         `;
         phoneContainer.appendChild(creatDiv);
+        
     })
+    toggleSpinner(false)
 }
 
 document.getElementById('search-btn').addEventListener('click', function(){
+    toggleSpinner(true)
     const searchInput=document.getElementById('search-input');
     const searchValue=searchInput.value;
     loadPhone(searchValue);
 })
 
-loadPhone()
+// Add spinner 
+const toggleSpinner = isLoading=>{
+    const spineer=document.getElementById('spinner');
+    if(isLoading){
+        spineer.classList.remove('d-none')
+    }
+    else{
+        spineer.classList.add('d-none')
+    }
+}
+
+// loadPhone()
