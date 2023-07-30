@@ -6,7 +6,7 @@ const loadPhone=(searchText)=>{
 
 const displayPhone=phones=>{
     // Phone slice 
-    phones=phones.slice(0,10);
+    phones=phones.slice(0,25);
 
     const phoneContainer=document.getElementById('phone-container');
     phoneContainer.textContent='';
@@ -86,4 +86,4 @@ const toggleSpinner = isLoading=>{
     }
 }
 
-loadPhone('a')
+loadPhone('iphone')
