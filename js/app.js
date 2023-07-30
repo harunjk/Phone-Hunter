@@ -21,7 +21,7 @@ const displayPhone=phones=>{
     }
 
     phones.forEach(phone => {
-
+        // console.log(phone)
         const creatDiv=document.createElement('div');
         creatDiv.classList.add('col');
         creatDiv.innerHTML=`
@@ -31,6 +31,7 @@ const displayPhone=phones=>{
             <h5 class="card-title">${phone.phone_name}</h5>
             <p class="card-text">${phone.slug}</p>
         </div>
+        <button onClick="phoneDetails('${phone.slug}')" class="btn btn-primary w-25 m-4" data-bs-toggle="modal" data-bs-target="#exampleModal">Details</button>
         </div>
         `;
         phoneContainer.appendChild(creatDiv);
@@ -39,11 +40,39 @@ const displayPhone=phones=>{
     toggleSpinner(false)
 }
 
+const phoneDetails=id=>{
+    const url=`https://openapi.programming-hero.com/api/phone/${id}`;
+    fetch(url)
+    .then(res => res.json())
+    .then(data => displayPhoneDetails(data.data))
+}
+
+const displayPhoneDetails=phone=>{
+    console.log(phone)
+    const detailsTitle=document.getElementById('exampleModalLabel');
+    detailsTitle.innerText=`${phone.name}`;
+    const moreDetails=document.getElementById('details-body');
+    moreDetails.innerHTML=`
+    <h4>Release Date : ${phone.releaseDate}</h4>
+    <h4>Storage: ${phone.mainFeatures.memory}</h4>
+    <h5>Display: ${phone.mainFeatures.displaySize}</h5>
+    `;
+}
+
 document.getElementById('search-btn').addEventListener('click', function(){
     toggleSpinner(true)
     const searchInput=document.getElementById('search-input');
     const searchValue=searchInput.value;
     loadPhone(searchValue);
+})
+
+// Enter key element 
+document.getElementById('search-input').addEventListener('keypress',function(e){
+    if(e.key==='Enter'){
+        const searchInput=document.getElementById('search-input');
+        const searchValue=searchInput.value;
+        loadPhone(searchValue);
+    }
 })
 
 // Add spinner 
@@ -57,4 +86,4 @@ const toggleSpinner = isLoading=>{
     }
 }
 
-// loadPhone()
+loadPhone('a')
